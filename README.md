@@ -3,6 +3,10 @@
 **Andrew Shoemaker** | Aerospace Engineering, University of Wisconsin–Madison  
 **Project portfolio overview** | Reviewed from private repositories on October 28, 2026
 
+**Website:** [GitHub Pages portfolio](https://sora12321.github.io/engineering-project-portfolio/) (available after Pages is enabled in repository Settings).
+
+**Website:** [GitHub Pages portfolio](https://sora12321.github.io/engineering-project-portfolio/) (available after Pages is enabled in repository Settings).
+
 I build technical software to solve engineering and everyday problems. My projects range from aircraft-performance modeling to browser automation and media pipelines. Most source repositories are private because they contain active team research, application integrations, or project-specific records. These summaries focus on **what the systems do, how they are designed, what was verified, and what remains unproven**.
 
 > **Access note:** These are project summaries, not public source mirrors. The links below refer to the included overview pages. Private repository links intentionally are not presented as public evidence.
@@ -34,5 +38,5 @@ I generally start with a concrete problem, learn the unfamiliar technical pieces
 
 - The summaries describe **source-observed architecture and historical documented results**, not a fresh local test run.
 - No source, personal records, credentials, private browser sessions, proprietary attachments, or active competition performance predictions are included.
-- Screenshots are intentionally omitted until representative examples can be captured or sanitized.
+- The visual gallery includes a repository-derived preliminary geometry plot and clearly labeled synthetic demo illustrations. Live application screenshots are not currently included.
 - For a technical review, I can discuss design decisions, limitations, test methods, and selected code examples where disclosure is appropriate.
