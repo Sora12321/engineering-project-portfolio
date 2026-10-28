@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>05 Windows Game Ui Automation | Andrew Shoemaker</title><style>:root{color-scheme:dark;--bg:#0b101a;--card:#151d2a;--text:#f1f5f9;--muted:#9bafc7;--border:#2b394b;--link:#91c7fd}*{box-sizing:border-box}body{font:16px/1.65 system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--text);margin:0}main{max-width:880px;margin:auto;padding:45px 24px 100px}a{color:var(--link)}header{color:var(--muted);font-size:14px;margin-bottom:35px}h1{font-size:36px;line-height:1.15;letter-spacing:-.035em;color:#f1f5f9}h2{font-size:23px;margin-top:32px;color:#cee5ff}p,li{color:#d6e0ee}strong{color:white}pre{overflow-x:auto;background:#131d2b;padding:16px;border:1px solid var(--border);border-radius:9px;color:#d6e0ee}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:90%}blockquote{border-left:3px solid #52799c;margin:1rem 0;padding-left:16px;color:var(--muted)}.back{font-weight:700}.foot{border-top:1px solid var(--border);padding-top:20px;color:var(--muted);font-size:13px;margin-top:30px}table{border-collapse:collapse}th,td{border-bottom:1px solid var(--border);padding:8px 12px;text-align:left}</style></head><body><main><header><a class="back" href="../index.html">← All projects</a></header><article><h1>Windows Game UI Automation — Screenshot Detection, OCR, and Recovery</h1>
+<p><strong>Status:</strong> Working source implementation; no recent live verification performed for this portfolio<br />
+<strong>Code:</strong> Private<br />
+<strong>Focus:</strong> Python, Windows UI automation, OCR, image matching, emulator state management</p>
+<h2>The problem</h2>
+<p>A desktop emulator exposes only a graphical interface. Automating repeated sequences requires detecting the current screen rather than assuming that every click advances the application to the expected state.</p>
+<h2>What I built</h2>
+<ul>
+<li>A Python controller for a <strong>Windows BlueStacks emulator</strong> that locates the correct window and captures its content.</li>
+<li><strong>OCR-based recognition of different journey states</strong>, with different action sequences and reward-handling branches.</li>
+<li>Image/region detection for result screens, plus window-handle reacquisition when capture fails.</li>
+<li>Configurable timing and <strong>periodic emulator resets</strong>, including a scheduled pause/recovery window.</li>
+<li>Separate modules for visual detection, clicking, reset handling, and interaction sequences.</li>
+</ul>
+<h2>Architecture</h2>
+<pre><code class="language-mermaid">flowchart TD
+  A[Emulator screenshot] --&gt; B[OCR and region detection]
+  B --&gt; C{Detected state}
+  C --&gt; D[Choose action sequence]
+  D --&gt; E[Windows input events]
+  E --&gt; F[Capture and verify next state]
+  F --&gt; B
+  F --&gt; G[Recovery / emulator reset]
+</code></pre>
+<h2>Scope and evidence</h2>
+<p>The repository contains the detection and action modules plus debugging utilities. The main-loop implementation handles a limited set of known journey/reward states. <strong>A complete production regression suite, Discord control, and Excel analytics are not established by this repository snapshot</strong>, so they are not claimed here. This is a UI-reliability learning project, not a customer-facing product.</p>
+<h2>Why this matters</h2>
+<p>The transferable skills are <strong>state detection, explicit error paths, repeatable UI interaction, and recovery from missing windows or unexpected screens</strong>.</p>
+</article><p class="foot">Private source repository · Project overview prepared October 28, 2026. No source code or personal information shared.</p></main></body></html>

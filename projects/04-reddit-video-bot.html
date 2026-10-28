@@ -1,0 +1,30 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>04 Reddit Video Bot | Andrew Shoemaker</title><style>:root{color-scheme:dark;--bg:#0b101a;--card:#151d2a;--text:#f1f5f9;--muted:#9bafc7;--border:#2b394b;--link:#91c7fd}*{box-sizing:border-box}body{font:16px/1.65 system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--text);margin:0}main{max-width:880px;margin:auto;padding:45px 24px 100px}a{color:var(--link)}header{color:var(--muted);font-size:14px;margin-bottom:35px}h1{font-size:36px;line-height:1.15;letter-spacing:-.035em;color:#f1f5f9}h2{font-size:23px;margin-top:32px;color:#cee5ff}p,li{color:#d6e0ee}strong{color:white}pre{overflow-x:auto;background:#131d2b;padding:16px;border:1px solid var(--border);border-radius:9px;color:#d6e0ee}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:90%}blockquote{border-left:3px solid #52799c;margin:1rem 0;padding-left:16px;color:var(--muted)}.back{font-weight:700}.foot{border-top:1px solid var(--border);padding-top:20px;color:var(--muted);font-size:13px;margin-top:30px}table{border-collapse:collapse}th,td{border-bottom:1px solid var(--border);padding:8px 12px;text-align:left}</style></head><body><main><header><a class="back" href="../index.html">← All projects</a></header><article><h1>Short-Form Video Production Pipeline — Cross-Platform Media Automation</h1>
+<p><strong>Status:</strong> Implemented local content-production workflow; publishing remains manual<br />
+<strong>Code:</strong> Private<br />
+<strong>Focus:</strong> Python, FFmpeg, text-to-speech, caption alignment, pipeline orchestration, regression testing</p>
+<h2>The problem</h2>
+<p>Producing a short-form video from a text story involves several manual steps: select content, prepare narration, synchronize captions, render media, create a thumbnail, and organize upload assets. A change to one step can disrupt downstream timing or file state.</p>
+<h2>What I built</h2>
+<ul>
+<li>A modular pipeline that <strong>ingests or selects stories, manages a queue, prepares narration, splits long stories, and generates short-form videos</strong>.</li>
+<li><strong>Edge TTS word-boundary timing</strong> mapped to punctuation-aware captions and FFmpeg video rendering, rather than approximating subtitle timing from character counts.</li>
+<li>Background clip selection, rendering, thumbnail generation, and packaging of titles/captions and media into <strong>upload-ready folders</strong>.</li>
+<li>Generation-state management to distinguish queued, pending-upload, uploaded, and failed items; regeneration <strong>avoids modifying previously uploaded videos</strong>.</li>
+<li>A macOS port with shared code kept compatible with Windows, plus regression and repository-safety checks in cross-platform CI.</li>
+</ul>
+<h2>Architecture</h2>
+<pre><code class="language-mermaid">flowchart LR
+  A[Story input / discovery] --&gt; B[Queue and filtering]
+  B --&gt; C[Prepare and split narration]
+  C --&gt; D[Edge TTS + word timing]
+  D --&gt; E[Caption synchronization]
+  E --&gt; F[FFmpeg render + thumbnail]
+  F --&gt; G[Upload-ready folder]
+  G --&gt; H[Manual publishing + URL tracking]
+</code></pre>
+<h2>Testing and limits</h2>
+<p>The repository contains targeted tests for <strong>caption synchronization, rendering, story splitting, background media, portable paths, repost tracking, and repository safety</strong>, with GitHub Actions configured for macOS and Windows. Those are repository tests and workflow configuration; this overview does not claim a fresh CI run or particular published view counts.</p>
+<p>Uploads are <strong>manual</strong>, and private queue history, account settings, generated media, analytics, and licensed assets are excluded. This is a production-workflow automation project, <strong>not a claim of a fully autonomous social-media publishing service</strong>.</p>
+<h2>Why this matters</h2>
+<p>This project taught me how to make <strong>sequential media-processing stages agree on their contracts and state</strong> and how to support a codebase on two operating systems without committing private content.</p>
+</article><p class="foot">Private source repository · Project overview prepared October 28, 2026. No source code or personal information shared.</p></main></body></html>

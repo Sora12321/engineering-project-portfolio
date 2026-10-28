@@ -1,0 +1,28 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>01 Boom Rc Aircraft | Andrew Shoemaker</title><style>:root{color-scheme:dark;--bg:#0b101a;--card:#151d2a;--text:#f1f5f9;--muted:#9bafc7;--border:#2b394b;--link:#91c7fd}*{box-sizing:border-box}body{font:16px/1.65 system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--text);margin:0}main{max-width:880px;margin:auto;padding:45px 24px 100px}a{color:var(--link)}header{color:var(--muted);font-size:14px;margin-bottom:35px}h1{font-size:36px;line-height:1.15;letter-spacing:-.035em;color:#f1f5f9}h2{font-size:23px;margin-top:32px;color:#cee5ff}p,li{color:#d6e0ee}strong{color:white}pre{overflow-x:auto;background:#131d2b;padding:16px;border:1px solid var(--border);border-radius:9px;color:#d6e0ee}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:90%}blockquote{border-left:3px solid #52799c;margin:1rem 0;padding-left:16px;color:var(--muted)}.back{font-weight:700}.foot{border-top:1px solid var(--border);padding-top:20px;color:var(--muted);font-size:13px;margin-top:30px}table{border-collapse:collapse}th,td{border-bottom:1px solid var(--border);padding:8px 12px;text-align:left}</style></head><body><main><header><a class="back" href="../index.html">← All projects</a></header><article><h1>Supersonic RC Aircraft — Concept Sizing and Engineering Tools</h1>
+<p><strong>Status:</strong> Active research/design project; <strong>preliminary model, not flight-validated</strong><br />
+<strong>Code:</strong> Private (research and team-development repository)<br />
+<strong>Focus:</strong> Python, aircraft performance modeling, numerical methods, CAD interoperability, automated tests</p>
+<h2>The problem</h2>
+<p>A high-speed remote-control aircraft concept needs to survive early feasibility checks before spending time and money on detailed CAD, CFD, hardware, or propulsion. A single “predicted top speed” is not enough: mass, drag uncertainty, inlet losses, available thrust, and trajectory interact.</p>
+<h2>What I worked on</h2>
+<ul>
+<li>Built and iterated an integrated <strong>low-order aircraft sizing and concept-screening workflow</strong> for a proposed high-speed RC aircraft project.</li>
+<li>Connected preliminary <strong>aerodynamic drag, propulsion and inlet, area-rule, trajectory, and optimization</strong> calculations to support systematic design comparisons.</li>
+<li>Added an <strong>OpenVSP geometry-generation and area-data bridge</strong>, including input validation before area-distribution results feed the model.</li>
+<li>Maintained structured engineering documentation, an equation/source register, and model-status rules that distinguish concept-screening outputs from validation evidence.</li>
+<li>Organized numerical tests for atmosphere, drag, propulsion, inlet, geometry, and OpenVSP-bridge components.</li>
+</ul>
+<h2>Architecture</h2>
+<pre><code class="language-mermaid">flowchart LR
+  A[Requirements and concept inputs] --&gt; B[Low-order aero, mass and propulsion assumptions]
+  B --&gt; C[Trajectory and configuration comparisons]
+  D[OpenVSP placeholder geometry] --&gt; E[Area-data validation bridge]
+  E --&gt; B
+  C --&gt; F[Concept screening and sensitivity reports]
+</code></pre>
+<h2>Engineering judgment and validation</h2>
+<p>The model is explicitly labeled <strong>preliminary, version 0.3</strong>. Its current use is concept screening, sensitivity analysis, method comparison, and workflow development. The repository documents <strong>10 relevant test modules</strong>; their presence is not a claim that all tests passed on every platform. OpenVSP placeholder geometry has been generated and visually inspected, but key geometry metrics need independent quantitative confirmation. <strong>Aircraft CFD, FEA, validated installed thrust, a design freeze, and supersonic flight have not been completed.</strong></p>
+<h2>Why this matters</h2>
+<p>It demonstrates how I approach open-ended aerospace engineering: decompose uncertain physics, build reusable analysis tools, identify what has and has not been validated, and use evidence to decide the next expensive step.</p>
+<p><strong>Evidence available privately:</strong> model status, engineering roadmap, source/equation registers, preliminary solver modules, and automated test modules. No proprietary geometry or unverified performance claims are shared here.</p>
+</article><p class="foot">Private source repository · Project overview prepared October 28, 2026. No source code or personal information shared.</p></main></body></html>

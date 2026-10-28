@@ -1,0 +1,27 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>03 Nutrislice Multiuser Prototype | Andrew Shoemaker</title><style>:root{color-scheme:dark;--bg:#0b101a;--card:#151d2a;--text:#f1f5f9;--muted:#9bafc7;--border:#2b394b;--link:#91c7fd}*{box-sizing:border-box}body{font:16px/1.65 system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--text);margin:0}main{max-width:880px;margin:auto;padding:45px 24px 100px}a{color:var(--link)}header{color:var(--muted);font-size:14px;margin-bottom:35px}h1{font-size:36px;line-height:1.15;letter-spacing:-.035em;color:#f1f5f9}h2{font-size:23px;margin-top:32px;color:#cee5ff}p,li{color:#d6e0ee}strong{color:white}pre{overflow-x:auto;background:#131d2b;padding:16px;border:1px solid var(--border);border-radius:9px;color:#d6e0ee}code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:90%}blockquote{border-left:3px solid #52799c;margin:1rem 0;padding-left:16px;color:var(--muted)}.back{font-weight:700}.foot{border-top:1px solid var(--border);padding-top:20px;color:var(--muted);font-size:13px;margin-top:30px}table{border-collapse:collapse}th,td{border-bottom:1px solid var(--border);padding:8px 12px;text-align:left}</style></head><body><main><header><a class="back" href="../index.html">← All projects</a></header><article><h1>Multi-User Browser Isolation — Controlled Architecture Prototype</h1>
+<p><strong>Status:</strong> Experimental fork; <strong>not a production multi-user service</strong><br />
+<strong>Code:</strong> Private<br />
+<strong>Focus:</strong> Python, browser session isolation, security design, system boundaries, synthetic testing</p>
+<h2>The problem</h2>
+<p>The personal nutrition logger was designed for one locally controlled account. Supporting multiple independent users on a single host introduces more difficult requirements: account separation, browser profile ownership, concurrency, authorization, and failure recovery.</p>
+<h2>The approach</h2>
+<ul>
+<li>Forked the existing application while preserving its single-user history, then <strong>separated prototype data and browser profiles</strong> from the original application.</li>
+<li>Defined a <strong>controlled local website and synthetic accounts</strong> for isolating browser-session experiments from real services.</li>
+<li>Investigated native Windows worker behavior as a comparison point for a more isolated execution model.</li>
+<li>Kept the live Nutrislice/Cronometer integrations and public deployment <strong>disabled</strong> during the experiment.</li>
+<li>Used explicit safety gates: a design is not accepted as isolated just because it appears to work for two test accounts.</li>
+</ul>
+<h2>Conceptual boundary</h2>
+<pre><code class="language-mermaid">flowchart TD
+  A[Request / identity] --&gt; B[Authorization and job coordination]
+  B --&gt; C[User A isolated browser state]
+  B --&gt; D[User B isolated browser state]
+  C --&gt; E[Synthetic test service]
+  D --&gt; E
+</code></pre>
+<h2>What is and is not proven</h2>
+<p>The repository describes a <strong>prototype testing plan using two synthetic accounts</strong>. The present default-branch README does <strong>not</strong> establish production-ready containment or live multi-user operation, and a referenced detailed status directory was not available from the connected default branch at review time. This overview intentionally avoids presenting proposed isolation controls as demonstrated security guarantees.</p>
+<h2>Why this matters</h2>
+<p>The project shows my interest in <strong>engineering security boundaries and testable assumptions before deploying automation to other users</strong>, rather than generalizing a personal script without controls.</p>
+</article><p class="foot">Private source repository · Project overview prepared October 28, 2026. No source code or personal information shared.</p></main></body></html>
